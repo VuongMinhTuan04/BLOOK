@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<div th:fragment="menu">
+		<div class="container">
+			<div class="container container-menu">
+			  	<div class="row">
+			    	<div class="col-2">
+			    		<img src="/img/Logo.webp" width="150" height="41.5">
+			    	</div>
+			    	
+				    <div class="col input-group flex-nowrap">
+				    	<input type="text" class="form-control search" placeholder="Tìm kiếm sản phẩm..." aria-describedby="addon-wrapping">
+				    	<button class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass"></i></button>
+				    </div>
+				    
+				    <div class="col-3 row">
+				    	<div class="col-8 col-8-menu">
+				    		<a href="#">Đăng nhập <span>/</span></a>
+					    	<a href="#">Đăng ký</a>
+				    	</div>
+				    	
+				    	<div class="col-4 col-4-menu">
+				    		<a class="btn" th:href="@{/BLOOK/cart}">
+								<i class="fa-solid fa-cart-shopping"></i>
+							</a>
+				    	</div>
+				    </div>
+			  	</div>
+			</div>
+		</div>
+		
+		<div class="container" style="padding-top: 20px; color: black;">
+			<div class="container container-menu">
+			  	<nav class="navbar navbar-expand-lg justify-content-center">
+					<ul class="navbar-nav">
+					
+				        <li class="nav-item dropdown dropdown-hover">
+				          	<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">DANH MỤC SẢN PHẨM</a>
+					        <ul class="dropdown-menu">
+					        	<li><a class="dropdown-item" href="#Sơ mi">Sơ mi</a></li>
+					            <li><a class="dropdown-item" href="#Áo Polo Slimfit">Áo Polo Slimfit</a></li>
+					            <li><a class="dropdown-item" href="#Áo Polo Basic">Áo Polo Basic</a></li>
+					            <li><a class="dropdown-item" href="#Áo thun cổ tròn">Áo thun cổ tròn</a></li>
+					            <li><a class="dropdown-item" href="#Quần Kaki dài">Quần Kaki dài</a></li>
+					            <li><a class="dropdown-item" href="#Quần Short">Quần Short</a></li>
+					            <li><a class="dropdown-item" href="#Quần Jeans">Quần Jeans</a></li>
+					            <li><a class="dropdown-item" href="#Phụ kiện">Phụ kiện</a></li>
+					        </ul>
+				        </li>
+				        		
+				        <li class="nav-item">
+				          	<a class="nav-link" href="/BLOOK/product">NEW ARRIVAL</a>
+				        </li>
+				        		
+				        <li class="nav-item dropdown">
+						    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ĐỒNG GIÁ</a>
+						    <ul class="dropdown-menu">
+						        <li><a class="dropdown-item" href="#">Đồng giá 189K</a></li>
+						        <li><a class="dropdown-item" href="#">Đồng giá 289K</a></li>
+						        <li class="divider"></li>
+						    </ul>
+						</li>
+				        		
+				       	<li class="nav-item">
+				        	<a class="nav-link" href="#">DANH SÁCH CỬA HÀNG</a>
+				    	</li>
+				    	
+				    	<li class="nav-item">
+				        	<a class="nav-link" href="/BLOOK/homepage">TRANG CHỦ</a>
+				    	</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

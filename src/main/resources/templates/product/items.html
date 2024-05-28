@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="//theme.hstatic.net/200000282921/1000966150/14/favicon.png?v=186" type="image/png">
+	<title>BLOOK - NEW ARRIVAL</title>
+	
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Icon Fontwesome -->
+	<script src="https://kit.fontawesome.com/8062880e27.js"></script>
+</head>
+
+<style>
+	/*Header*/
+	.container-fluid-header{
+		background-color: black;
+		height: 41px;
+		color: white;
+	}
+	
+	.container-fluid-menu{
+		padding: 15px 0px;
+		box-shadow: 0px 5px #e4e4e7;
+	}
+	
+	.marquee-padding{
+		padding: 7px 0px;
+	}
+	
+	.container-header, .container-menu{
+		width: 1130px;
+		font-size: 14px;
+	}
+	
+	.col-8-menu{
+		font-size: 15px;
+		text-align: center;
+		padding: 10px 0px;
+	}
+	
+	.col-8-menu a{
+		color: black;
+		text-decoration: none;
+	}
+	
+	.col-4-menu button{
+		padding-top: 7px;
+	}
+	
+	.search{
+		font-size: 14px;
+	}
+	
+	.col-8-menu{
+		padding: 7px 0px;
+	}
+	
+	a{
+		text-decoration: none;
+		color: white;
+	}
+	
+	.col-header{
+		padding: 7px 0px;
+	}
+	
+	nav li{
+		margin: 0px 15px 0px 15px;
+		font-weight: bold;
+		font-size: 14px;
+	}
+	
+	.dropdown-menu{
+		width: 300px;
+		font-size: 14px;
+	}
+	
+	.dropdown-item:hover{
+		text-decoration: underline;
+	}
+	
+	.fa-cart-shopping {
+	    font-size: 25px;
+	}
+	
+	.dropdown-menu {
+	    display: block;
+	    visibility: hidden;
+	    max-height: 0;
+	    opacity: 0;
+	    transition: max-height 0.3s ease-in-out, visibility 0s linear 0.3s, opacity 0.3s ease-in-out;
+	    overflow: hidden;
+	}
+	
+	.dropdown-menu .dropdown-item:active {
+	    background-color: transparent;
+	    color: black;
+	}
+	
+	.nav-item.dropdown:hover .dropdown-menu {
+	    visibility: visible;
+	    max-height: 500px;
+	    opacity: 1;
+	    transition-delay: 0s, 0s, 0s;
+	}
+    
+    .card-header,
+    .card-body {
+        border: none;
+    }
+    
+    .button {
+    	width: 220px;
+    	display: inline-block;
+    	padding: 10px 20px;
+    	color: black;
+    	text-decoration: none;
+    	border: 3px solid black;
+    	border-radius: 10px;
+    	position: relative;
+    	overflow: hidden;
+    	transition: all 0.3s ease;
+     }
+    
+    .button:hover::before {
+    	content: '';
+    	position: absolute;
+    	top: 50%;
+    	left: 50%;
+    	width: 300%;
+    	height: 300%;
+    	transition: all 0.5s;
+    	border-radius: 50%;
+    	z-index: -1;
+    	transform: translate(-50%, -50%);
+     }
+    
+    .button:hover{
+    	animation: pulsate 1s ease-in-out;
+    	box-shadow: 0 0 10px 10px rgba(100, 100, 100, 0.5);
+    }
+    @keyframes pulsate{
+    	0%{
+    		box-shadow: 
+    		0 0 55px #606060,
+        	0 0 100px #404040;
+    	}
+    }
+    
+    /*Footer*/
+    .col-footer{
+    	height: 300px;
+    }
+    
+    .col-footer a:hover{
+    	text-decoration: underline;
+    }
+    
+    .col-footer li{
+    	list-style: none;
+    	width: 50px;
+    }
+    
+    /*items*/
+    .accordion-body, .accordion-button{
+    	font-size: 14px;
+    }
+    
+    .accordion-item a{
+    	color: black;
+    }
+    
+    .accordion-item a:hover{
+    	text-decoration: underline;
+    }
+    
+    .col-product{
+    	margin-bottom: 10px;
+    }
+
+    .col-product img{
+    	width: 206px;
+	    height: 206px;
+	    display: block; 
+	    margin: 0 auto;
+	    text-align: center;
+    }
+    
+    .card-body h5{
+    	font-size: 13px;
+    	font-weight: bold;
+    }
+    
+    .card-body p{
+    	font-size: 13px;
+    	font-weight: bold;
+    }
+</style>
+
+<body>
+	<div class="container-fluid container-fluid-header">
+		<div class="container">
+			<div class="container container-header text-center">
+			  	<div class="row">
+			    	<div class="col marquee-padding">
+			    		<marquee>ĐÓN HÈ CÙNG BLOOK</marquee>
+			    	</div>
+			    	
+			    	<div class="col"></div>
+			    	
+				    <div class="col row col-header" style="color: white;">
+				    	<div class="col">
+				    		<a href="#"><i class="fa-solid fa-truck"></i> Kiểm tra đơn hàng</a>
+				    	</div>
+				    	
+				    	<div class="col">
+				    		<a href="#"><i class="fa-solid fa-hand-holding-dollar"></i> Khuyến mãi</a>
+				    	</div>
+				    </div>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid container-fluid-menu">
+		<div th:include="header/menu :: menu"></div>
+	</div>
+	
+	<div class="container" style="margin-top: 30px;">
+		<form th:action="@{/BLOOK/product}" th:object="${product}" method="post">
+			<div class="row">
+				<div class="col-3">
+					<div class="accordion accordion-flush" id="accordionFlushExample" style="font-size: 14px; width: 250px;">
+					  	<div class="accordion-item">
+					  		<h2 class="accordion-header">
+					      		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+					        		TẤT CẢ SẢN PHẨM
+					      		</button>
+					    	</h2>
+					    
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">ÁO POLO BASIC</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">ÁO POLO SLIMFIT</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">ÁO POLO PREMIUM</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">ÁO THUN CỔ TRÒN</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">SẢN PHẨM THỂ THAO</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">QUẦN JEAN</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">QUẦN KAKI</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">QUẦN SHORT</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">ĐỒ LÓT &#38; PHỤ KIỆN</a>
+					      		</div>
+					    	</div>
+					    	
+					    	<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+					      		<div class="accordion-body">
+					      			<a href="#">SƠ MI</a>
+					      		</div>
+					    	</div>
+					  	</div>
+					</div>
+				</div>
+				
+				<div class="col">
+					<div class="container text-center">
+					  	<div class="row">
+					
+					    	<div class="col-md-4 col-product" th:each="items : ${products}">
+					      		<div class="card" style="width: 18rem;">
+								  	<img th:src="@{/img-product/} + ${items.image}" class="card-img-top">
+								  	
+								  	<div class="card-body">
+								    	<h5 class="card-title" th:text="${items.name}"></h5>
+								    	<p class="card-text" th:text="${#numbers.formatDecimal(items.price, 0, 'COMMA', 0, 'POINT')}"></p>
+								    	<button class="btn btn-outline-success" th:formaction="@{/BLOOK/product/add/{id_product}(id=${items.id_product})}">
+								    		<i class="fa-solid fa-plus"></i> Thêm vào giỏ hàng
+										</button>
+								  	</div>
+								</div>
+					    	</div>
+			
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div>
+		<div th:include="footer/footer :: footer"></div>
+	</div>
+</body>
+
+</html>
