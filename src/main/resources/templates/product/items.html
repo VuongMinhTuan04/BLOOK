@@ -202,27 +202,7 @@
 
 <body>
 	<div class="container-fluid container-fluid-header">
-		<div class="container">
-			<div class="container container-header text-center">
-			  	<div class="row">
-			    	<div class="col marquee-padding">
-			    		<marquee>ĐÓN HÈ CÙNG BLOOK</marquee>
-			    	</div>
-			    	
-			    	<div class="col"></div>
-			    	
-				    <div class="col row col-header" style="color: white;">
-				    	<div class="col">
-				    		<a href="#"><i class="fa-solid fa-truck"></i> Kiểm tra đơn hàng</a>
-				    	</div>
-				    	
-				    	<div class="col">
-				    		<a href="#"><i class="fa-solid fa-hand-holding-dollar"></i> Khuyến mãi</a>
-				    	</div>
-				    </div>
-			  	</div>
-			</div>
-		</div>
+		<div th:include="header/header :: header"></div>
 	</div>
 	
 	<div class="container-fluid container-fluid-menu">
@@ -315,7 +295,7 @@
 								  	<div class="card-body">
 								    	<h5 class="card-title" th:text="${items.name}"></h5>
 								    	<p class="card-text" th:text="${#numbers.formatDecimal(items.price, 0, 'COMMA', 0, 'POINT')}"></p>
-								    	<button class="btn btn-outline-success" th:formaction="@{/BLOOK/product/add/{id_product}(id=${items.id_product})}">
+								    	<button class="btn btn-outline-success" th:formaction="@{/BLOOK/product/add/{id}(id=${items.id_product})}">
 								    		<i class="fa-solid fa-plus"></i> Thêm vào giỏ hàng
 										</button>
 								  	</div>

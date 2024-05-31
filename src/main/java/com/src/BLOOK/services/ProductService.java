@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.src.BLOOK.models.Product;
 
-public interface CartService {
+public interface ProductService {
 	public Product add(Long id);
 	public Product update(Long id, Integer quantity);
 	public void remove(Long id);

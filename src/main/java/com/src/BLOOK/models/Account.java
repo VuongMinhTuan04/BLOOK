@@ -35,10 +35,16 @@ public class Account {
 	@Column(name = "phone_number", length = 12, nullable = false)
 	private String phone_number;
 	
+	@Column(name = "avatar", columnDefinition = "TEXT")
+	private String avatar;
+	
 	@ManyToOne
 	@JoinColumn(name = "role", referencedColumnName = "role", nullable = false)
 	private Role_Account role;
 	
 	@OneToMany(mappedBy = "account")
 	private Set<Order> orders;
+	
+	@OneToMany(mappedBy = "account")
+	private Set<Cart> carts;
 }

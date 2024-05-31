@@ -13,18 +13,30 @@
 			    		<img src="/img/Logo.webp" width="150" height="41.5">
 			    	</div>
 			    	
-				    <div class="col input-group flex-nowrap">
+				    <div class="col input-group">
 				    	<input type="text" class="form-control search" placeholder="Tìm kiếm sản phẩm..." aria-describedby="addon-wrapping">
 				    	<button class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass"></i></button>
 				    </div>
 				    
-				    <div class="col-3 row">
-				    	<div class="col-8 col-8-menu">
-				    		<a href="#">Đăng nhập <span>/</span></a>
-					    	<a href="#">Đăng ký</a>
-				    	</div>
+				    <div class="col-5 row" style="vertical-align: middle;">
+				    	<div class="col-9 col-8-menu" th:if="${session.username != null}">
+				    		<div class="row">
+				    			<div class="col-8" style="padding-left: 0px;">
+				    				<p th:text="${session.username.fullname}" style="font-weight: bold;"></p>
+				    			</div>
+				    			
+				    			<div class="col">
+				    				<a href="/BLOOK/sign-out">Đăng xuất</a>
+				    			</div>
+				    		</div>
+			            </div>
+			            
+			            <div class="col-8 col-8-menu" th:if="${session.username == null}">
+			                <a href="/BLOOK/sign-in">Đăng nhập <span>/</span></a>
+			                <a href="/BLOOK/sign-up">Đăng ký</a>
+			            </div>
 				    	
-				    	<div class="col-4 col-4-menu">
+				    	<div class="col-2 col-4-menu">
 				    		<a class="btn" th:href="@{/BLOOK/cart}">
 								<i class="fa-solid fa-cart-shopping"></i>
 							</a>

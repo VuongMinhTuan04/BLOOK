@@ -182,9 +182,9 @@
     	height: 100px;
     }
     
-    .col button{
+    /* .col button{
     	width: 130px;
-    }
+    } */
     
     .col-9{
     	width: 990px;
@@ -206,27 +206,7 @@
 
 <body>
 	<div class="container-fluid container-fluid-header">
-		<div class="container">
-			<div class="container container-header text-center">
-			  	<div class="row">
-			    	<div class="col marquee-padding">
-			    		<marquee>ĐÓN HÈ CÙNG BLOOK</marquee>
-			    	</div>
-			    	
-			    	<div class="col"></div>
-			    	
-				    <div class="col row col-header" style="color: white;">
-				    	<div class="col">
-				    		<a href="#"><i class="fa-solid fa-truck"></i> Kiểm tra đơn hàng</a>
-				    	</div>
-				    	
-				    	<div class="col">
-				    		<a href="#"><i class="fa-solid fa-hand-holding-dollar"></i> Khuyến mãi</a>
-				    	</div>
-				    </div>
-			  	</div>
-			</div>
-		</div>
+		<div th:include="header/header :: header"></div>
 	</div>
 	
 	<div class="container-fluid container-fluid-menu">
@@ -236,7 +216,7 @@
 	<div class="container text-center container-cart" style="margin-top: 30px;">
 		<h3>GIỎ HÀNG CỦA BẠN</h3>
 		
-		<form th:action="@{/BLOOK/cart}" th:object="${order}" method="post">
+		<form th:action="@{/BLOOK/cart}" method="post">
 			<div class="row" style="margin-top: 20px;"> 
 				<div class="col-9">
 					<table class="table">
@@ -253,23 +233,23 @@
 					  	</thead>
 					  	
 					  	<tbody>
-					    	<tr th:each="product : ${products}">
+					    	<tr th:each="cart : ${carts}">
 					      		<td>
-					      			<img th:src="@{/img-product/} + ${product.image}" width="120" height="120">
+					      			<img th:src="@{/img-product/} + ${cart.image}" width="120" height="120">
 					      		</td>
-					      		<td th:text="${product.name}"></td>
-					      		<td th:text="${product.formatPrice}"></td>
+					      		<td th:text="${cart.name}"></td>
+					      		<td th:text="${#numbers.formatDecimal(cart.price, 0, 'COMMA', 0, 'POINT')}"></td>
 					      		<td>
-									<input type="number" class="form-control" min="1" max="10" th:value="${product.quantity}" th:name="'quantity-' + ${product.id}">
+									<input type="number" class="form-control" min="1" max="10" th:value="${cart.quantity}" name="quantity">
 								</td>
-								<td th:text="${#numbers.formatDecimal(product.price * product.quantity, 0, 'COMMA', 0, 'POINT')}"></td>
+								<td th:text="${#numbers.formatDecimal(cart.price * cart.quantity, 0, 'COMMA', 0, 'POINT')}"></td>
 					      		<td>
-					      			<a class="btn btn-cart" th:href="@{/BLOOK/product/remove/{id}(id=${product.id})}">
+					      			<a class="btn btn-cart" th:href="@{/BLOOK/product/remove/{id}(id=${cart.id_cart})}">
 					      				<i class="fa-solid fa-xmark"></i>
 					      			</a>
 					      		</td>
 					      		<td>
-					      			<button class="btn btn-outline-warning" th:formaction="@{/BLOOK/product/update/{id}(id=${product.id})}">CẬP NHẬT</button>
+					      			<button class="btn btn-outline-warning" th:formaction="@{/BLOOK/product/update/{id}(id=${cart.id_cart})}">CẬP NHẬT</button>
 					      		</td>
 					    	</tr>
 					  	</tbody>
@@ -369,15 +349,15 @@
 							        		<button type="submit" class="btn btn-outline-success" style="width: 100%;" th:formaction="/BLOOK/product/buy">
 							        			Phương thức thanh toán
 							        		</button>
-							      		</div>-->
+							      		</div>
 							    	</div>
 							  	</div>
-							</div>
+							</div> -->
 						</div>
-						
 					</div>
 				</div>
 			</div>
+			
 		</form>
 	</div>
 </body>

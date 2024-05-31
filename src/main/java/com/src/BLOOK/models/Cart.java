@@ -1,8 +1,5 @@
 package com.src.BLOOK.models;
 
-import java.util.Date;
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,30 +7,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "Orders")
-public class Order {
+@Table(name = "cart")
+public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_order")
-	private Long id_order;
+	@Column(name = "id_cart")
+	private Integer id_cart;
 	
 	@Column(name = "name", length = 150, nullable = false)
 	private String name;
-	
-	@Column(name = "fullname", length = 150, nullable = false)
-	private String fullname;
 	
 	@Column(name = "price", nullable = false)
 	private Double price;
@@ -41,18 +28,10 @@ public class Order {
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", nullable = false)
-	private Date date = new Date();
+	@Column(name = "image", columnDefinition = "TEXT", nullable = false)
+	private String image;
 	
 	@ManyToOne
 	@JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
 	private Account account;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_product", referencedColumnName = "id_product", nullable = false)
-	private Product product;
-	
-	@OneToMany(mappedBy = "order")
-	private Set<OrderDetail> orderDetails;
 }
