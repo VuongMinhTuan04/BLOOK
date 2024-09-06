@@ -186,11 +186,6 @@
     	width: 130px;
     } */
     
-    .col-9{
-    	width: 990px;
-    	border-right: 1px solid #e2e8f0;
-    }
-    
     .btn-outline-warning{
     	font-size: 14px;
     }
@@ -240,22 +235,27 @@
 					      		<td th:text="${cart.name}"></td>
 					      		<td th:text="${#numbers.formatDecimal(cart.price, 0, 'COMMA', 0, 'POINT')}"></td>
 					      		<td>
-									<input type="number" class="form-control" min="1" max="10" th:value="${cart.quantity}" name="quantity">
+									<input type="number" class="form-control" min="1" max="10" 
+									th:value="${cart.quantity}" th:name="'quantity' + ${cart.id_cart}">
 								</td>
 								<td th:text="${#numbers.formatDecimal(cart.price * cart.quantity, 0, 'COMMA', 0, 'POINT')}"></td>
 					      		<td>
-					      			<a class="btn btn-cart" th:href="@{/BLOOK/product/remove/{id}(id=${cart.id_cart})}">
+					      			<a class="btn btn-cart" th:href="@{/BLOOK/product/remove/{id}(id=${cart.id_cart})}" data-bs-toggle="tooltip" title="Xóa Sản Phẩm">
 					      				<i class="fa-solid fa-xmark"></i>
 					      			</a>
 					      		</td>
 					      		<td>
-					      			<button class="btn btn-outline-warning" th:formaction="@{/BLOOK/product/update/{id}(id=${cart.id_cart})}">CẬP NHẬT</button>
+					      			<button class="btn btn-outline-warning" th:formaction="@{/BLOOK/product/update/{id}(id=${cart.id_cart})}" data-bs-toggle="tooltip" title="Cập nhật số lượng sản phẩm">
+					      				CẬP NHẬT
+					      			</button>
 					      		</td>
 					    	</tr>
 					  	</tbody>
 					</table>
 					
-					<button class="btn btn-outline-primary" th:formaction="@{/BLOOK/product/clear}">XÓA GIỎ HÀNG</button>
+					<button class="btn btn-outline-primary" th:formaction="@{/BLOOK/product/clear}" data-bs-toggle="tooltip" title="Xóa toàn bộ sản phẩm khỏi giỏ hàng">
+						XÓA GIỎ HÀNG
+					</button>
 				</div>
 			
 				<div class="col-3">
@@ -265,7 +265,7 @@
 						</div>
 						
 						<div class="col" style="text-align: right;">
-							<p th:text="${sum}"></p>
+							<p th:text="${#numbers.formatDecimal(sum, 0, 'COMMA', 0, 'POINT')}"></p>
 						</div>
 					</div>
 					
@@ -293,66 +293,15 @@
 					
 					<div class="row" style="margin-top: 10px;">
 						<div class="col">
-							<button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<button class="btn btn-outline-success" th:formaction="@{/BLOOK/pay}" data-bs-toggle="tooltip" title="Chuyển sang thanh toán"> 
 								ĐẶT HÀNG
 							</button>
-							
-							<!-- <div class="modal fade text-left" id="exampleModal" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
-							  	<div class="modal-dialog modal-dialog-centered">
-							    	<div class="modal-content">
-							      		<div class="modal-header">
-							        		<h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin giao hàng</h1>
-							        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="width: 32px; height: 32px;"></button>
-							      		</div>
-							      	
-							      		<div class="modal-body row">
-							        		<div class="col-9">
-									            <label for="recipient-name" class="col-form-label">Họ Và Tên:</label>
-									        	<input type="text" class="form-control" placeholder="Họ Và Tên" th:field="*{fullname}" name="fullname">
-									        	
-									        	<div th:if="${#fields.hasErrors('name')}" style="color: red;">
-									                <p th:each="error : ${#fields.errors('name')}" th:text="${error}"></p>
-									            </div>
-									        </div>
-									        
-									        <div class="col-7">
-									            <label for="recipient-name" class="col-form-label">Email:</label>
-									        	<input type="text" class="form-control" placeholder="Email" th:field="*{email}" name="email">
-									        	
-									        	<div th:if="${#fields.hasErrors('email')}" style="color: red;">
-									                <p th:each="error : ${#fields.errors('email')}" th:text="${error}"></p>
-									            </div>
-									        </div>
-									        
-									        <div class="col-5">
-									            <label for="recipient-name" class="col-form-label">Số Điện Thoại:</label>
-									        	<input type="text" class="form-control" placeholder="Số Điện Thoại" th:field="*{phoneNumber}" name="phoneNumber">
-									        	
-									        	<div th:if="${#fields.hasErrors('phoneNumber')}" style="color: red;">
-									                <p th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}"></p>
-									            </div>
-									        </div>
-									        
-									        <div class="col-9">
-									            <label for="recipient-name" class="col-form-label">Địa Chỉ:</label>
-									        	<input type="text" class="form-control" placeholder="Địa Chỉ" th:field="*{address}" name="address">
-									        	
-									        	<div th:if="${#fields.hasErrors('address')}" style="color: red;">
-									                <p th:each="error : ${#fields.errors('address')}" th:text="${error}"></p>
-									            </div>
-									        </div>
-									        
-									        <h5 th:text="${message}"></h5>
-							      		</div> 
-							      	
-							      		<div class="modal-footer text-center">
-							        		<button type="submit" class="btn btn-outline-success" style="width: 100%;" th:formaction="/BLOOK/product/buy">
-							        			Phương thức thanh toán
-							        		</button>
-							      		</div>
-							    	</div>
-							  	</div>
-							</div> -->
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col" style="text-align: left;">
+					    	<div th:if="${error != null}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 						</div>
 					</div>
 				</div>
@@ -361,5 +310,14 @@
 		</form>
 	</div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+       		return new bootstrap.Tooltip(tooltipTriggerEl)
+    	})
+	});
+</script>
 
 </html>

@@ -189,6 +189,14 @@
 	    text-align: center;
     }
     
+    .card-body{
+    	height: 150px;
+    }
+    
+    .card-body{
+    	height: 150px;
+    }
+    
     .card-body h5{
     	font-size: 13px;
     	font-weight: bold;
@@ -197,6 +205,14 @@
     .card-body p{
     	font-size: 13px;
     	font-weight: bold;
+    }
+    
+    li{
+    	list-style-type: none;
+    }
+    
+    .page-item{
+    	margin: 0px;
     }
 </style>
 
@@ -289,20 +305,43 @@
 					  	<div class="row">
 					
 					    	<div class="col-md-4 col-product" th:each="items : ${products}">
-					      		<div class="card" style="width: 18rem;">
-								  	<img th:src="@{/img-product/} + ${items.image}" class="card-img-top">
-								  	
-								  	<div class="card-body">
-								    	<h5 class="card-title" th:text="${items.name}"></h5>
-								    	<p class="card-text" th:text="${#numbers.formatDecimal(items.price, 0, 'COMMA', 0, 'POINT')}"></p>
-								    	<button class="btn btn-outline-success" th:formaction="@{/BLOOK/product/add/{id}(id=${items.id_product})}">
-								    		<i class="fa-solid fa-plus"></i> Thêm vào giỏ hàng
-										</button>
-								  	</div>
-								</div>
-					    	</div>
-			
+							    <div class="card" style="width: 18rem;">
+							        <img th:src="@{/img-product/} + ${items.image}" class="card-img-top">
+							        <div class="card-body">
+							            <div class="d-flex flex-row">
+							                <h5 class="me-2" th:text="${items.id_product}"></h5>
+							                <h5 class="card-title" th:text="${items.name}"></h5>
+							            </div>
+							            <p class="card-text" th:text="${#numbers.formatDecimal(items.price, 0, 'COMMA', 0, 'POINT')}"></p>
+							            <button class="btn btn-outline-success" th:formaction="@{/BLOOK/product/add/{id}(id=${items.id_product})}">
+							                <i class="fa-solid fa-plus"></i> Thêm vào giỏ hàng
+							            </button>
+							        </div>
+							    </div>
+							</div>
+
 					  	</div>
+					  	
+					  	<nav>
+						    <ul class="pagination justify-content-center">
+						        <li class="page-item" th:if="${currentPage > 1}">
+						            <a class="page-link" th:href="@{'?pageNO=1'}">
+						                <i class="fa-solid fa-backward-fast"></i>
+						            </a>
+						        </li>
+						        
+						       	<li class="page-item" th:each="i : ${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage == i ? 'active' : ''}">
+						            <a class="page-link" th:href="@{'?pageNO=' + ${i}}" th:text="${i}"></a>
+						        </li>
+						        
+						        <li class="page-item" th:if="${currentPage < totalPage}">
+							        <a class="page-link" th:href="@{'?pageNO=' + ${totalPage}}">
+							            <i class="fa-solid fa-forward"></i>
+							        </a>
+							    </li>
+						    </ul>
+						</nav>
+						
 					</div>
 				</div>
 			</div>

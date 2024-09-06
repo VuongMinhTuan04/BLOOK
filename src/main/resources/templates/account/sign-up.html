@@ -11,6 +11,8 @@
 	
 	<!-- Icon Fontwesome -->
 	<script src="https://kit.fontawesome.com/8062880e27.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <style>
@@ -163,6 +165,24 @@
     	list-style: none;
     	width: 50px;
     }
+    
+    /*Sign up*/
+    h2{
+    	text-align: center;
+    }
+    
+    .mb-3-forget a{
+    	color: black;
+    }
+    
+    .mb-3-forget a:hover{
+    	text-decoration: underline;
+    }
+    
+    .error-message {
+        color: red;
+    	font-size: 0.875em;
+   	}
 </style>
 
 <body>
@@ -174,10 +194,122 @@
 		<div th:include="header/menu :: menu"></div>
 	</div>
 	
+	<div class="container" style="margin-top: 30px; width: 550px;">
+		<h2>ĐĂNG KÝ</h2>
+		
+		<form th:action="@{/BLOOK/verify-otp}" method="post" enctype="multipart/form-data" id="otpForm">
+		    <div class="input-group mb-3">
+		        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+		        <input type="text" class="form-control" placeholder="Tài khoản..." name="username" required>
+		    </div>
+		    
+		    <div class="input-group mb-3">
+		        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>        
+		        <input type="password" class="form-control" placeholder="Mật khẩu..." name="password" required>
+		    </div>
+		    
+		    <div class="input-group mb-3">
+		        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-signature"></i></span>        
+		        <input type="text" class="form-control" placeholder="Họ và Tên..." name="fullname" required>
+		    </div>
+		    
+		    <div class="input-group mb-3">
+		        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>        
+		        <input type="email" class="form-control" placeholder="Email..." name="email" required>
+		    </div>
+		    
+		    <div class="input-group mb-3">
+		        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-phone"></i></span>        
+		        <input type="tel" class="form-control" placeholder="Số điện thoại..." name="phone_number" required>
+		    </div>
+		    
+		    <div class="input-group mb-3">
+		        <input type="file" class="form-control" name="file" required>
+		        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-file"></i></span>
+		    </div>
+		    
+		    <div class="mb-3" style="text-align: center;">
+		        <button type="button" class="btn btn-outline-success" id="openModalBtn">
+				    Đăng Ký
+				</button>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				    <div class="modal-dialog modal-dialog-centered">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <h1 class="modal-title fs-5 w-100 text-center" id="exampleModalLabel">MÃ XÁC NHẬN (OTP)</h1>
+				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				                <div class="mb-3" style="text-align: center; color: red">
+				                    <p id="errorText"></p>
+				                </div>
+				            </div>
+				            
+				            <div class="modal-body text-center">
+				            	<div class="mb-3 form-floating">
+				                	<input type="text" class="form-control" id="otpInput" name="otp" placeholder="###-###-###" required>
+				                	<label for="otpInput">Nhập mã OTP</label>
+				                </div>
+				                    
+				               	<button type="submit" class="btn btn-outline-success">Xác Minh</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		    
+		    <div class="mb-3" style="text-align: center; color: green">
+		        <p th:text="${success}"></p>
+		    </div>
+		    
+		    <div class="mb-3" style="text-align: center; color: red">
+		        <p th:text="${fail}"></p>
+		    </div>
+		</form>
+	</div>
 	
 	<div>
 		<div th:include="footer/footer :: footer"></div>
 	</div>
 </body>
+
+<script>
+document.getElementById('openModalBtn').addEventListener('click', function() {
+    // Reset error message
+    document.getElementById('errorText').textContent = '';
+
+    // Show modal
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    myModal.show();
+
+    // Disable the "Xác Minh" button initially
+    document.getElementById('submitBtn').disabled = true;
+});
+
+// Validate OTP input
+document.getElementById('otpInput').addEventListener('input', function() {
+    var otpValue = this.value.trim();
+    var submitBtn = document.getElementById('submitBtn');
+
+    if (otpValue !== '') {
+        // Enable the "Xác Minh" button when OTP is filled
+        submitBtn.disabled = false;
+    } else {
+        // Disable the "Xác Minh" button if OTP is empty
+        submitBtn.disabled = true;
+    }
+});
+
+document.getElementById('otpForm').addEventListener('submit', function(event) {
+    var otpValue = document.getElementById('otpInput').value.trim();
+
+    if (otpValue === '') {
+        // Prevent form submission
+        event.preventDefault();
+        // Show error message
+        document.getElementById('errorText').textContent = 'Vui lòng nhập mã OTP.';
+    }
+});
+</script>
 
 </html>

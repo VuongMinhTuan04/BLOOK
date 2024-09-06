@@ -32,6 +32,10 @@ public class Cart {
 	private String image;
 	
 	@ManyToOne
+    @JoinColumn(name = "id_product", referencedColumnName = "id_product", nullable = false)
+    private Product product;
+	
+	@ManyToOne
 	@JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
 	private Account account;
 }

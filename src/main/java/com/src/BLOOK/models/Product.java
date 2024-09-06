@@ -3,6 +3,8 @@ package com.src.BLOOK.models;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,8 +44,12 @@ public class Product {
 	@Column(name = "image", columnDefinition = "TEXT", nullable = false)
 	private String image;
 	
+	@Column(name = "status", nullable = false)
+	private Boolean status;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date = new Date();
 
 	@ManyToOne
@@ -55,4 +61,7 @@ public class Product {
 
 	@OneToMany(mappedBy = "product")
 	private Set<OrderDetail> orderDetails;
+	
+	@OneToMany(mappedBy = "product")
+    private Set<Cart> carts;
 }

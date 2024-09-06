@@ -18,11 +18,14 @@
 				    	<button class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass"></i></button>
 				    </div>
 				    
-				    <div class="col-5 row" style="vertical-align: middle;">
+				    <div class="col-5 row">
 				    	<div class="col-9 col-8-menu" th:if="${session.username != null}">
 				    		<div class="row">
-				    			<div class="col-8" style="padding-left: 0px;">
-				    				<p th:text="${session.username.fullname}" style="font-weight: bold;"></p>
+				    			<div class="col-8 d-flex align-items-center" style="padding-left: 0px; margin-left: 20px;">
+				    				<a href="#Tài Khoản">
+				    					<img th:src="@{/img-avatar/{avatar}(avatar=${session.username.avatar})}" width="35" height="35" style="border-radius: 50%">
+				    				</a>
+				    				<p th:text="${session.username.fullname}" style="font-weight: bold; margin: 0px 0px 0px 5px;"></p>
 				    			</div>
 				    			
 				    			<div class="col">
@@ -32,7 +35,8 @@
 			            </div>
 			            
 			            <div class="col-8 col-8-menu" th:if="${session.username == null}">
-			                <a href="/BLOOK/sign-in">Đăng nhập <span>/</span></a>
+			                <a href="/BLOOK/sign-in">Đăng nhập</a>
+			                <span>/</span>
 			                <a href="/BLOOK/sign-up">Đăng ký</a>
 			            </div>
 				    	
@@ -42,6 +46,7 @@
 							</a>
 				    	</div>
 				    </div>
+				    
 			  	</div>
 			</div>
 		</div>
@@ -74,13 +79,24 @@
 						    <ul class="dropdown-menu">
 						        <li><a class="dropdown-item" href="#">Đồng giá 189K</a></li>
 						        <li><a class="dropdown-item" href="#">Đồng giá 289K</a></li>
-						        <li class="divider"></li>
 						    </ul>
 						</li>
 				        		
 				       	<li class="nav-item">
 				        	<a class="nav-link" href="#">DANH SÁCH CỬA HÀNG</a>
 				    	</li>
+				    	
+				    	<li class="nav-item dropdown" th:if="${session.role == true}">
+						    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">QUẢN LÝ</a>
+						    <ul class="dropdown-menu">
+						        <li><a class="dropdown-item" href="/BLOOK/manager/product_statistics">Thống Kê Sản Phẩm</a></li>
+						        <li><a class="dropdown-item" href="/BLOOK/manager/revenue_statistics">Thống Kê Doanh Thu</a></li>
+						        <li><a class="dropdown-item" href="/BLOOK/manager/invoice_statistics">Thống Kê Hóa Đơn</a></li>
+						        <li><a class="dropdown-item" href="/BLOOK/manager/account_management">Quản Lý Tài Khoản</a></li>
+						       	<li><a class="dropdown-item" href="/BLOOK/manager/product_management">Quản Lý Sản Phẩm</a></li>
+						       	<li><a class="dropdown-item" href="/BLOOK/manager/categories_management">Quản Lý Loại Sản Phẩm</a></li>
+						    </ul>
+						</li>
 				    	
 				    	<li class="nav-item">
 				        	<a class="nav-link" href="/BLOOK/homepage">TRANG CHỦ</a>

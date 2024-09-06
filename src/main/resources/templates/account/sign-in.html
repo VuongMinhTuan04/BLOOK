@@ -11,6 +11,8 @@
 	
 	<!-- Icon Fontwesome -->
 	<script src="https://kit.fontawesome.com/8062880e27.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <style>
@@ -193,12 +195,19 @@
 		<form th:action="@{/BLOOK/sign-in}" method="post">
 			<div class="input-group mb-3">
 				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
-			  	<input type="text" class="form-control" placeholder="Tài khoản..." name="username">
+			  	<input type="text" class="form-control" placeholder="Tài khoản..." name="username" th:value="${username}">
 			</div>
 			
 			<div class="input-group mb-3">
 			  	<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>		
-			  	<input type="password" class="form-control" placeholder="Mật khẩu..." name="password">
+			  	<input type="password" class="form-control" placeholder="Mật khẩu..." name="password" th:value="${password}">
+			</div>
+			
+			<div class="form-check mb-3">
+				<input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="remember">
+				 <label class="form-check-label" for="flexCheckDefault">
+				   	Lưu Tài Khoản?
+				 </label>
 			</div>
 			
 			<div class="mb-3 mb-3-forget">
@@ -206,7 +215,7 @@
 			</div>
 			
 			<div class="mb-3" style="text-align: center;">
-			  	<button type="submit" class="btn btn-outline-success" th:formaction="@{/BLOOK/homepage}">ĐĂNG NHẬP</button>
+			  	<button type="submit" class="btn btn-outline-success" th:formaction="@{/BLOOK/homepage}" onclick="signIn(event)">ĐĂNG NHẬP</button>
 			</div>
 			
 			<div class="mb-3" style="text-align: center; color: red">
@@ -235,5 +244,59 @@
 		<div th:include="footer/footer :: footer"></div>
 	</div>
 </body>
+
+<script>
+function signIn(event){
+    var username = document.getElementsByName('username')[0].value;
+    var password = document.getElementsByName('password')[0].value;
+
+    if (username.trim() === '' || password.trim() === '') {
+        console.log("Username or password is empty");
+        return;
+    }
+
+    // Assume an asynchronous check of username and password
+    // Replace this with your actual server-side authentication logic
+    authenticateUser(username, password)
+        .then((loginSuccess) => {
+            if (loginSuccess) {
+                // Display SweetAlert for successful login
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Đăng nhập thành công",
+                    showConfirmButton: false,
+                    timer: 5000
+                }).then(() => {
+                    // Redirect to homepage after 5 seconds
+                    setTimeout(function() {
+                        window.location.href = "/BLOOK/homepage";
+                    }, 5000);
+                });
+            } else {
+                // Handle incorrect username or password case
+                console.log("Incorrect username or password");
+                // Redirect to sign-in page with error message
+                window.location.href = "/BLOOK/sign-in?error=incorrectPassword";
+            }
+        })
+        .catch((error) => {
+            console.error("Authentication error:", error);
+            // Handle authentication error here (if any)
+        });
+}
+
+// Function to simulate asynchronous authentication (replace with actual implementation)
+function authenticateUser(username, password) {
+    return new Promise((resolve, reject) => {
+        // Replace this with your actual server-side authentication logic
+        if (username === "your_correct_username" && password === "your_correct_password") {
+            resolve(true); // Authentication successful
+        } else {
+            resolve(false); // Authentication failed
+        }
+    });
+}
+</script>
 
 </html>
